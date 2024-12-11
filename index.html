@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My CTF Playground</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    
+    <button id="toggle-btn" class="toggle-btn">☰</button>
+
+    <div class="container">
+
+        <!-- Left Panel -->
+        <nav class="left-panel" id="left-panel">
+            
+            <h1>Nalpo</h1>
+            <ul>
+                <li><a href="#" onclick="loadContent('whoami')">~/WhoAmI</a></li>
+                <li><a href="#" onclick="loadContent('writeups')">~/CTFwritups</a></li>
+                <li><a href="#" onclick="loadContent('social')">~/Others</a></li>
+                <li><a href="#" onclick="loadContent('working')">~/Currntly working</a></li>
+            </ul>
+        </nav>
+        
+        <!-- Right Panel (Content Area) -->
+        <div class="right-panel" id="right-panel">
+            <div id="content-window">
+                <h1>--> Welcome!</h1>
+                <p>Want to know about CTF ?<br>
+                You can find  writeups on /CTFwriteups</p>
+                <h2>--> Where to start Hacking ?</h2>
+                <p>CTF is the great way to start your journy..<br>
+                It teach you how to find stuffs</p>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js?v=1.0.1"></script>
+</body>
+</html>
