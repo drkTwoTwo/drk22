@@ -19,7 +19,7 @@ function loadContent(section) {
             fileName = 'working.html'; // File for Other section
             break;
         case 'packer':
-            filename = 'writeup/packer.html';
+            fileName = 'writeup/packer.html';
             break;
 
         default:
