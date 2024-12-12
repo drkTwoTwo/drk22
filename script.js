@@ -20,6 +20,7 @@ function loadContent(section) {
             break;
         case 'packer':
             filename = 'writeup/packer.html';
+            break;
 
         default:
             contentWindow.innerHTML = `
