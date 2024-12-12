@@ -21,7 +21,9 @@ function loadContent(section) {
         case 'packer':
             fileName = 'writeup/packer.html';
             break;
-
+        case 'packer1':
+            fileName = 'writeup/packer1.html';
+            break;
         default:
             contentWindow.innerHTML = `
                 <h1>Welcome!</h1>
