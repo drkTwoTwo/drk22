@@ -132,6 +132,10 @@ body {
     font-weight: bold;
     margin-bottom: 10px;
 }
+.right-panel img {
+    height:auto;
+    width: 60%;
+}
 
 .right-panel p {
     font-size: 1em;
