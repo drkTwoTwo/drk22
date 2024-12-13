@@ -4,7 +4,7 @@ body {
     padding: 0;
     font-family: 'Courier New', monospace; /* Updated font family */
     background-color: rgb(44, 51, 51); /* Dark background */
-    color: rgb(82, 211, 216); /* Light text color */
+    color: #A7D477; /* Light text color */
     display: flex;
     height: 100vh;
 }
@@ -96,8 +96,8 @@ body {
 .left-panel ul {
     list-style: none;
     padding: 50px;
-    margin-left: 30px;
-    margin-top:110px;
+    margin-left: 60px;
+    margin-top:170px;
     width: 100%;
 }
 
@@ -106,7 +106,7 @@ body {
 }
 
 .left-panel ul li a {
-    color: #78B3CE; /* Light text color */
+    color: #7BD3EA; /* Light text color */
     text-decoration: none;
     font-weight: bold;
     font-size: 1.2em;
@@ -128,7 +128,7 @@ body {
 
 .right-panel h2 {
     font-size: 1.3em;
-    color:#D2FF72;
+    
     font-weight: bold;
     margin-bottom: 10px;
 }
