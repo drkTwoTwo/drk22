@@ -16,6 +16,13 @@ function loadContent(section) {
         case 'working':
             fileName = 'working.html';
             break;
+        case 'packer':
+            fileName = 'writeup/packer.html'
+            break;
+        case 'packer1':
+            fileName = 'writeup/packer1.html'
+            break;
+
         default:
             // Default content
             contentWindow.innerHTML = `
