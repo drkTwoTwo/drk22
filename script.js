@@ -1,8 +1,8 @@
- 
 function loadContent(section) {
     const contentWindow = document.getElementById('content-window');
     let fileName;
 
+    // Determine which file to load based on the section
     switch (section) {
         case 'whoami':
             fileName = 'whoami.html'; // File for About section
@@ -28,13 +28,16 @@ function loadContent(section) {
             contentWindow.innerHTML = `
                 <h1>Welcome!</h1>
                 <p>Want to know about CTF ?</p>
-                <br><p>You can find  writeups on /CTFwriteups</p>
-                <h2>Where to start Hacking ?</h2>
-                <p>CTF is the great way to start your journy..</p><br>
-                <p>It teach you how to find stuffs</p>
+                <br><p>You can find writeups on /CTFwriteups</p>
+                <h2>Where to start Hacking?</h2>
+                <p>CTF is a great way to start your journey...</p><br>
+                <p>It teaches you how to find stuff</p>
             `;
             return; // Exit the function if no matching section
     }
+
+    // Update the URL and push state into the history
+    history.pushState({ section: section }, `${section} - My Website`, `#${section}`);
 
     // Fetch the HTML file dynamically and insert it into the content window
     fetch(fileName)
@@ -53,6 +56,14 @@ function loadContent(section) {
         });
 }
 
+// Handle the browser's back/forward navigation
+window.addEventListener('popstate', (event) => {
+    if (event.state && event.state.section) {
+        loadContent(event.state.section); // Reload the appropriate section based on the history state
+    }
+});
+
+// Toggle visibility for the panels (left and right)
 document.getElementById("toggle-btn").addEventListener("click", function() {
     const leftPanel = document.getElementById("left-panel");
     const rightPanel = document.getElementById("right-panel");
