@@ -1,0 +1,28 @@
+<div>
+    <h1>Picker2 Writeup</h1>
+    <p>In this challenge, we had to figure out how to call the <code>win</code> function even though the program blocked it. Here’s how we solved it step by step:</p>
+    
+    <h2>Step 1: Understanding the Problem</h2>
+    <img src="img/picker2/step1.png" alt="Understanding the Problem">
+    <p>The program used <code>eval()</code> to run user input but blocked anything with the word <code>'win'</code>. We also couldn’t assign values or use indirect methods to call <code>win</code>.Because of filter()</p>
+    
+    <h2>Step 2: Failed Attempts</h2>
+    
+    <p>We tried breaking the word <code>'win'</code> into pieces or building it dynamically, but <code>eval()</code> didn’t allow that. Other tricks also didn’t work because of the program’s restrictions.</p>
+    <img src="img/picker2/step2.png" alt="Failed Attempts">
+    
+<img src="img/picker2/step3.png" >
+    
+    <h2>Step 3: Finding a Hint</h2>
+    <img src="img/picker2/hint.png" alt="Finding a Hint">
+
+    
+    
+    <h2>Step 4: Solving It</h2>
+    <img src="img/picker2/step4.png" alt="Solving It">
+    <p>We used this input in <code>eval()</code> to read and print the flag:</p>
+    <pre>print(open('flag.txt', 'r').read())</pre>
+    <p>And it worked! This printed the flag without needing to call <code>win</code>.</p>
+    
+    
+</div>

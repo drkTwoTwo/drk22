@@ -22,7 +22,9 @@ function loadContent(section) {
         case 'packer1':
             fileName = 'writeup/packer1.html'
             break;
-
+        case 'picker2':
+            fileName = 'writeup/picker2.html';
+            break;
         default:
             // Default content
             contentWindow.innerHTML = `
