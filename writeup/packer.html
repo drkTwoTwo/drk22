@@ -5,14 +5,14 @@
     <p>
         First, I downloaded the binary and checked its file type using the <code>file</code> command.
     </p>
-    <img src="img/step1.png" alt="Step 1: Downloading the binary">
+    <img src="img/packer/step1.png" alt="Step 1: Downloading the binary">
 
     <h3>Step 2: Inspecting the File</h3>
     <p>
         The output revealed that it was a <strong>statically linked ELF binary</strong>, meaning all necessary libraries are included within the binary itself.
         However, upon closer inspection, I noticed the binary lacked section headers, which made it challenging to analyze initially.
     </p>
-    <img src="img/step2.png" alt="Step 2: Inspecting the file type">
+    <img src="img/packer/step2.png" alt="Step 2: Inspecting the file type">
 
     <h3>Step 3: Checking Strings</h3>
     <p>
@@ -22,13 +22,13 @@
     <p>
         For more details about UPX, you can check their <a href="https://upx.github.io/">official website</a>.
     </p>
-    <img src="img/step3.png" alt="Step 3: Checking strings">
+    <img src="img/packer/step3.png" alt="Step 3: Checking strings">
 
     <h3>Step 4: Initial Debugging</h3>
     <p>
         I loaded the binary into <code>gdb</code>, but due to the UPX compression, I couldn't retrieve any valuable information. At this stage, the packed binary was still obfuscated.
     </p>
-    <img src="img/step4.png" alt="Step 4: Initial debugging in gdb">
+    <img src="img/packer/step4.png" alt="Step 4: Initial debugging in gdb">
 
     <h3>Step 5: Unpacking the Binary</h3>
     <p>
@@ -38,20 +38,20 @@
     <p>
         This process successfully restored the binary's section headers, making it much easier to analyze.
     </p>
-    <img src="img/step5.png" alt="Step 5: Unpacking the binary with UPX">
+    <img src="img/packer/step5.png" alt="Step 5: Unpacking the binary with UPX">
 
     <h3>Step 6: Decompiling with Binary Ninja</h3>
     <p>
         I loaded the unpacked binary into <strong>Binary Ninja</strong> for detailed analysis. During this step, I discovered a long string embedded in the binary.
     </p>
-    <img src="img/step6.png" alt="Step 6: Analyzing with Binary Ninja">
+    <img src="img/packer/step6.png" alt="Step 6: Analyzing with Binary Ninja">
 
     <h3>Step 7: Extracting the Flag</h3>
     <p>
         The string appeared to be encoded, so I used <strong>CyberChef</strong> to decode it. After decoding, I found the flag:
     </p>
     <p><strong>Flag:</strong> <code>picoCTF{U9X_UnP4ck1N6_B1n4Ri3S_e190c3f3}</code></p>
-    <img src="path/to/step7.png" alt="Step 7: Extracting the flag">
+    
 
     <p>This writeup documents the process I followed to unpack and analyze the binary, eventually retrieving the flag. It demonstrates how useful tools like <code>upx</code>, <strong>Binary Ninja</strong>, and <strong>CyberChef</strong> can be in binary exploitation tasks.</p>
 </div>

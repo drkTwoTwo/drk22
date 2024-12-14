@@ -53,7 +53,7 @@ body {
     overflow-y: auto;
     transition: width 0.3s ease; /* Smooth resizing */
     font-family: 'Courier New', monospace; /* Same font as in screenshot */
-    color: rgb(82, 211, 216); /* Light text color */
+    color: rgb(255, 225, 90); /* Light text color */
 }
 
 /* Full-width state for right panel */
@@ -106,7 +106,7 @@ body {
 }
 
 .left-panel ul li a {
-    color: #7BD3EA; /* Light text color */
+    color: #d1ffc0; /* Light text color */
     text-decoration: none;
     font-weight: bold;
     font-size: 1.2em;
@@ -128,7 +128,7 @@ body {
 
 .right-panel h2 {
     font-size: 1.3em;
-    
+    color:#a6f300;
     font-weight: bold;
     margin-bottom: 10px;
 }
@@ -149,6 +149,7 @@ body {
     list-style: none;
     padding: 0;
     margin-top: 50px;
+    margin-left: 50px;
 }
 
 .right-panel ul li {
