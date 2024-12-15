@@ -32,7 +32,8 @@ function loadContent(section) {
             // Default content
             contentWindow.innerHTML = `
                 <h1>Welcome!</h1>
-                <p>This is the default content.</p>
+                <p>The website is under construction, so don't expect advanced features.</p>
+
             `;
             return;
     }
