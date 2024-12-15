@@ -27,6 +27,7 @@ function loadContent(section) {
             break;
         case 'picker3':
             fileName = 'writeup/picker3.html';
+            break;
         default:
             // Default content
             contentWindow.innerHTML = `
