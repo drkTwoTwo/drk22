@@ -31,8 +31,12 @@ function loadContent(section) {
         default:
             // Default content
             contentWindow.innerHTML = `
-                <h1>Welcome!</h1>
-                <p>The website is under construction, so don't expect advanced features.</p>
+                 <h1>--> Welcome!</h1>
+                <p>Want to know about CTF ?<br>
+                You can find  writeups on /CTFwriteups</p>
+                <h2>--> Where to start Hacking ?</h2>
+                <p>Interested in Android app hacking / creaking / Exploiting ?</p>
+                <p> DM me in Discord If Interested </p>
 
             `;
             return;
