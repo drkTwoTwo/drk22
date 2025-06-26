@@ -1,54 +1,69 @@
-# Plant Detection Web App – Setup Guide
+# Medicinal Plant Detection Web App – Setup Guide
 
-This is a local Flask-based web application that detects plant diseases from uploaded leaf images using a PyTorch model. Based on the prediction, the app displays disease information in **English** or **Assamese**.
-
----
-
-## Step-by-Step Instructions to Run the Project
-
-### 1. Extract the Project Folder
-
-After receiving or downloading the project as a `.zip` file, extract it to a known location on your computer.
+This is a Flask-based web application that detects **20 species of medicinal plants** using a deep learning model trained with PyTorch. Users can upload a plant leaf image, and the app will identify the plant species and display detailed information in **English** or **Assamese**.
 
 ---
 
-### 2. Open a Terminal or Command Prompt
+## 🌿 Project Features
 
-Navigate to the extracted project folder using the terminal or command prompt:
+- Detects 20 medicinal plant species from leaf images
+- Displays plant information in English or Assamese
+- Supports image upload via web interface
+- Redirects to a fallback page for uncertain predictions
 
-```bash
-cd path_to_your_project_folder
+---
+
+## 📁 Folder Structure
+
+```
+project_root/
+├── app.py                   # Main Flask application
+├── model.pt                 # Trained PyTorch model
+├── ass_plant_details/       # Assamese HTML info pages (0.html - 19.html)
+├── classes/                 # English HTML info pages (0.html - 19.html + unknown.html)
+├── images/                  # Optional images (e.g., icons, UI assets)
+├── templates/
+│   └── index.html           # Upload form (image + language selector)
+└── uploads/                 # Auto-created, stores uploaded images temporarily
 ```
 
 ---
 
-### 3. Create a Python Virtual Environment
+## ✅ Setup Instructions (Run Locally)
 
-Use the following command to create a virtual environment:
+### 1. Extract the Project
+
+Unzip the project folder to a known location on your computer.
+
+---
+
+### 2. Open Terminal and Navigate to the Project
+
+```bash
+cd path_to_project/Medicinal\ Plant\ Detction
+```
+
+---
+
+### 3. Create and Activate a Python Virtual Environment
 
 ```bash
 python -m venv venv
 ```
 
-Then activate the environment:
+- **Windows:**
+  ```bash
+  venv\Scripts\activate
+  ```
 
-- **On Windows**:
-
-```bash
-venv\Scripts\activate
-```
-
-- **On Linux/macOS**:
-
-```bash
-source venv/bin/activate
-```
+- **Linux/macOS:**
+  ```bash
+  source venv/bin/activate
+  ```
 
 ---
 
-### 4. Install Required Python Packages
-
-Once the virtual environment is activated, install the necessary dependencies using:
+### 4. Install Required Dependencies
 
 ```bash
 pip install flask torch torchvision pillow beautifulsoup4
@@ -56,63 +71,89 @@ pip install flask torch torchvision pillow beautifulsoup4
 
 ---
 
-### 5. Verify the Folder Structure and Required Files
+### 5. Verify Required Files and Pages
 
-Make sure your project folder has the following structure:
+Make sure these exist:
 
-```
-project_folder/
-├── app.py
-├── model.pt
-├── classes/                 # English HTML files like 0.html, 1.html, etc.
-├── ass_plant_details/       # Assamese HTML files (same filenames as in classes/)
-├── templates/
-│   └── index.html           # Upload form for images
-├── uploads/                 # This folder will be created automatically at runtime
-└── classes/unknown.html     # Fallback page for low-confidence predictions
-```
-
-> Make sure the `model.pt` file was saved using `model.state_dict()` and matches the architecture in `app.py`.
+- `model.pt` (your trained model)
+- `classes/0.html` to `classes/19.html`
+- `ass_plant_details/0.html` to `ass_plant_details/19.html`
+- `classes/unknown.html` — shown when model confidence is low
+- `templates/index.html` — the upload form
 
 ---
 
-### 6. Run the Application
-
-Start the Flask development server with the following command:
+### 6. Start the Application
 
 ```bash
 python app.py
 ```
 
+If needed, modify the last line of `app.py` to change the port:
+
+```python
+app.run(host="0.0.0.0", port=5000, debug=True)
+```
+
 ---
 
-### 7. Open the Web App in Your Browser
+### 7. Open in Your Web Browser
 
-Once the server is running, open this address in your browser:
+Visit the following address in your browser:
 
 ```
 http://localhost:5000
 ```
 
-You’ll see an upload form where you can:
+You will see a form to:
 
-- Choose an image of a plant leaf.
-- Select the language (English or Assamese).
-- Submit the form to get the plant disease classification and details.
-
----
-
-## Notes
-
-- **Supported image formats:** `.jpg`, `.jpeg`, `.png`
-- **Confidence threshold:** If the model is less than 60% confident in its prediction, the app will show the `unknown.html` page.
-- The number of plant classes is determined by the number of `.html` files in the `classes/` folder.
+- Upload an image of a plant leaf
+- Select the preferred language (English or Assamese)
+- View detailed plant information after submission
 
 ---
 
-## Optional
+## ⚙️ Model Details
 
-If you'd like to deactivate the virtual environment after you're done:
+- Architecture: EfficientNet-B0 (`torchvision.models.efficientnet_b0`)
+- Trained for: 20 medicinal plant species
+- Output: Predicted class ID → redirects to corresponding HTML page
+
+---
+
+## 📌 App Behavior
+
+- Uses softmax to get prediction confidence.
+- If confidence ≥ 60%: redirects to corresponding `0.html`–`19.html`.
+- If confidence < 60%: redirects to `unknown.html`.
+
+---
+
+## 🖼 Supported Image Formats
+
+- `.jpg`
+- `.jpeg`
+- `.png`
+
+---
+
+## 🔧 Troubleshooting
+
+- **ModuleNotFoundError**: Ensure virtual environment is active and all dependencies are installed.
+- **Model loading issue**: Check if `model.pt` matches architecture in `app.py` and is loaded via `load_state_dict`.
+- **Static assets not loading**: Place any needed images or CSS inside `static/` and link them properly in `index.html`.
+
+---
+
+## 🧪 Testing & Sample Images
+
+You can place test images in the `images/` folder or upload them directly through the form to check model predictions.
+
+---
+
+## 🧹 Deactivate the Environment
+
+After you're done:
 
 ```bash
 deactivate
@@ -120,12 +161,3 @@ deactivate
 
 ---
 
-## Troubleshooting
-
-- **ModuleNotFoundError:** Make sure you've activated your virtual environment and installed all required packages.
-- **Model not loading:** Ensure `model.pt` matches the architecture defined in the code.
-- **Port already in use:** If port 5000 is busy, you can change it in `app.py` like this:
-
-```python
-app.run(host="0.0.0.0", port=5001, debug=True)
-```
